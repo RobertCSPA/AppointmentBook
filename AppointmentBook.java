@@ -21,7 +21,10 @@ public class AppointmentBook {
      * 1 <= duration <= 60
      */
     private void reserveBlock(int period, int startMinute, int duration) {
-        /* implementation not shown */ }
+        for(int i = startMinute; i<startMinute+duration; i++){
+            schedule[period-1][i]=false;
+        }
+    }
 
     /**
      * Searches for the first block of duration free minutes during period, as
@@ -54,7 +57,15 @@ public class AppointmentBook {
      * Preconditions: 1 <= startPeriod <= endPeriod <= 8; 1 <= duration <= 60
      */
     public boolean makeAppointment(int startPeriod, int endPeriod, int duration){
-      return false;}
+        for(int i = startPeriod; i<= endPeriod; i++){
+            int freeBlock = findFreeBlock(endPeriod, duration);
+            if(freeBlock > -1){
+                reserveBlock(i, freeBlock, duration);
+                return true;
+            }
+        }
+        return true;
+    }
 
     // There may be instance variables, constructors, and methods that are not shown.
 
